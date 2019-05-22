@@ -8,6 +8,6 @@ const events = require("./events");
 const logger = require("./logger");
 
 events.spotify.start(config, logger)
-handler.start(bot, config, commands, logger);
+handler.start(bot, config, commands, logger, events);
 
 bot.login(config.discordtoken);
