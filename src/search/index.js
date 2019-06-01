@@ -7,11 +7,10 @@ const receive = {
     const Discord = require("discord.js");
     const embed = new Discord.RichEmbed() 
     google.resultsPerPage = 1
-    var searchword = message.content.substring(8)
+    var searchword = message.content.substring(9)
         
     google(searchword, function (err, res){
-    if (err) message.channel.send('예상치 못한 에러가 발생하였습니다. : ' + err);
-
+        try {
         var link = res.links[0]
         embed.setTitle(link.title)
         .setFooter(searchword + '에 대해 찾아보았어요!')
@@ -19,7 +18,7 @@ const receive = {
         .setDescription(link.description)
         .setColor(0x00AE86)
         message.channel.send({embed}).catch(err => console.log(err));   
-
+        } catch(err) {message.channel.send('예상치 못한 에러가 발생하였습니다. : ' + err); }
         });
     }
 }
