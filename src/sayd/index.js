@@ -8,7 +8,7 @@ const receive = {
                 message.channel.send('예상치 못한 에러가 발생하였습니다 : ' + err);
                 logger.error(err)
             });
-        message.channel.send(params[1]);
+        message.channel.send(message.content.substring(6));
     }
 };
 

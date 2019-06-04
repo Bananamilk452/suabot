@@ -1,5 +1,5 @@
 const receive = {
-    start: (bot, config, commands, logger) => {
+    start: (bot, config, commands, logger, events) => {
     bot.on("message", message => {
         if (message.author.bot) return;
         if (message.channel.type === "dm" && message.author.id !== bot.user.id) message.channel.send("명령어는 채팅창에 입력해주세요!"); 
@@ -13,7 +13,7 @@ const receive = {
 
     bot.on("ready", () => {
         logger.info(`Bot Started, ${bot.users.size} of online users, ${bot.channels.size} of channels, ${bot.guilds.size} of guilds. \nLogged in as ${bot.user.tag}`);
-        bot.user.setActivity(`s!help로 명령어를 확인하세요!`);
+        bot.user.setActivity(`s!help로 명령어를 확인하세요!                                                              `);
     });
 
     function search_command(command_name) {
@@ -34,7 +34,7 @@ const receive = {
             if(params.length - 1 < command.parameters.length) {
                 message.reply("알맞지 않는 내용입니다!");
             } else {
-                command.execute(message, bot, params, config, logger);
+                command.execute(message, bot, params, config, logger, events);
             }
         }
     }

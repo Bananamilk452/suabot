@@ -1,0 +1,33 @@
+{
+  "name": "suabot",
+  "version": "1.0.0",
+  "description": "discord bot for party",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lemongreen",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "danbooru": "^3.1.0",
+    "discord.js": "^11.5.0",
+    "js-base64": "^2.5.1",
+    "querystring": "^0.2.0",
+    "request": "^2.88.0",
+    "winston": "^2.4.4",
+    "winston-daily-rotate-file": "^3.9.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bananamilk452/suabot.git"
+  },
+  "keywords": [
+    "bot"
+  ],
+  "bugs": {
+    "url": "https://github.com/Bananamilk452/suabot/issues"
+  },
+  "homepage": "https://github.com/Bananamilk452/suabot#readme"
+}

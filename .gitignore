@@ -64,4 +64,4 @@ config.json
 
 logs/
 
-package*
+test/

@@ -2,25 +2,37 @@ const receive = {
     command: "search",
     description: "구글에서 검색한 내용을 출력합니다.",
     parameters: ['검색 내용'],
-    execute: (message, bot, params) => {
-    const google = require('google')
-    const Discord = require("discord.js");
-    const embed = new Discord.RichEmbed() 
-    google.resultsPerPage = 1
-    var searchword = message.content.substring(8)
-        
-    google(searchword, function (err, res){
-    if (err) message.channel.send('예상치 못한 에러가 발생하였습니다. : ' + err);
+    execute: (message, bot, params, config, logger, events) => {
+        const Discord = require("discord.js");
+        const embed = new Discord.RichEmbed()
+        var request = require('request');
+        var cheerio = require("cheerio");
+        var stitle, surl, scontent
+        var searchword = message.content.substring(9)
 
-        var link = res.links[0]
-        embed.setTitle(link.title)
-        .setFooter(searchword + '에 대해 찾아보았어요!')
-        .setURL(link.href)
-        .setDescription(link.description)
-        .setColor(0x00AE86)
-        message.channel.send({embed}).catch(err => console.log(err));   
+        request('https://www.google.com/search?hl=ko&q=' + encodeURI(searchword) + '&sa=N&num=1&ie=UTF-8&oe=UTF-8&gws_rd=ssl', function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                var $ = cheerio.load(body)
+                var main = $('#main').children()[3].children[0]
 
+                try {
+                    stitle = main.children[0].children[0].children[0].children[0].data
+                    surl = main.children[0].children[0].attribs.href
+                    scontent = main.children[2].children[0].children[0].children[0].children[0].children[0].children[2].data
+
+                    embed.setTitle(stitle)
+                        .setFooter(searchword + '에 대해 찾아보았어요!')
+                        .setURL(surl.substring(7))
+                        .setDescription(scontent)
+                        .setColor(0x00AE86)
+                    message.channel.send({embed}).catch(err => console.log(err))
+                } catch (err) {message.channel.send('예상치 못한 에러가 발생하였습니다. : ' + err);}
+            } else {
+
+                logger.warn(error);
+            }
         });
+
     }
 }
 
