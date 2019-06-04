@@ -12,14 +12,14 @@ const receive = {
                 'Content-Type': 'application/json',
                 'Authorization': "Bearer " + events.spotify.token()
             },
-            url: 'https://api.spotify.com/v1/search?q=' + message.content.substring(10).replace(/ /gm, "%20").replace(/&/gm, "%26") + "&type=track&limit=1"
+            url: 'https://api.spotify.com/v1/search?q=' + encodeURI(message.content.substring(10)) + "&type=track&limit=1"
         }, function (error, response, body) {
             let result = JSON.parse(body).tracks.items[0];
             let explicit;
             if (result.explicit) explicit = "O"
             else if (!result.explicit) explicit = "X"
             embed.setTitle(result.name + " - " + result.artists[0].name)
-                .setFooter(message.content.substring(10) + '에 대해 Spotify에서 찾아보았어요!')
+                .setFooter(message.content.substring(11) + '에 대해 Spotify에서 찾아보았어요!')
                 .setURL(result.external_urls.spotify)
                 .setDescription(result.album.name)
                 .setThumbnail(result.album.images[1].url)
