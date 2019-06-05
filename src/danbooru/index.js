@@ -26,7 +26,7 @@ const receive = {
                 message.channel.send({embed}).catch(err => console.log(err));
             } catch (error) {
                 logger.error(error)
-                message.reply("알맞지 않은 태그 또는 부합하는 일러스트가 없습니다!")
+                message.channel.send("알맞지 않은 태그 또는 부합하는 일러스트가 없습니다!")
             }
             });
     }
