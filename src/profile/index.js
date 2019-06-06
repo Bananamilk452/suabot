@@ -16,7 +16,7 @@ const receive = {
             .addField('상태', message.author.presence.status, true)
             .addField('플레이 중', message.author.presence.game || "없음", true)
             .addField('접속 날짜', message.guild.member(message.author).joinedAt)
-            .addField('접속 날짜', message.author.createdAt)
+            .addField('가입 날짜', message.author.createdAt)
             .setColor(0x00AE86)
                 message.guild.member(message.author).roles.forEach(element => {
                     roles = roles + element.name + ", "
@@ -32,7 +32,7 @@ const receive = {
             .addField('상태', member.presence.status, true)
             .addField('플레이 중', member.presence.game || "없음", true)
             .addField('접속 날짜', message.guild.member(member).joinedAt)
-            .addField('접속 날짜', member.createdAt)
+            .addField('가입 날짜', member.createdAt)
             .setColor(0x00AE86)
                 message.guild.member(member).roles.forEach(element => {
                     roles = roles + element.name + ", "
