@@ -12,8 +12,8 @@ const receive = {
 
     commands.forEach(element => {
       embed.addField('`s!' + element.command + '`', element.description)
-      message.channel.send({embed}).catch(err => console.log(err));
     });
+    message.channel.send({embed}).catch(err => console.log(err));
   }
 }
 
