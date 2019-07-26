@@ -10,7 +10,7 @@ const receive = {
         request.get({
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': "Bearer " + events.spotify.token()
+                'Authorization': "Bearer " + events[1].token()
             },
             url: 'https://api.spotify.com/v1/search?q=' + encodeURI(message.content.substring(10)) + "&type=track&limit=1"
         }, function (error, response, body) {
